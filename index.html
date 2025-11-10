@@ -16,6 +16,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="https://amdproservice.wordpress.com" target="_blank">Blog</a></li>
       </ul>
     </nav>
   </header>
@@ -33,7 +34,7 @@
   <section id="about" class="section about">
     <h2>About Us</h2>
     <p>
-      At <strong>AMD Professional Services</strong>, we specialize in providing efficient accounting, bookkeeping, and business
+      At <strong>AMD Professional Services</strong>, we provide efficient accounting, bookkeeping, and business
       management solutions tailored for small to medium enterprises. Our goal is to simplify your financial processes and help you focus on growing your business.
     </p>
   </section>
@@ -65,10 +66,11 @@
   <section id="contact" class="section contact">
     <h2>Contact Us</h2>
     <p>Let’s talk about how we can help your business grow.</p>
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="email" id="email" placeholder="Your Email" required />
-      <textarea id="message" placeholder="Your Message" required></textarea>
+    
+    <form id="contactForm" action="https://formspree.io/f/xrbrzngg" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
       <button type="submit" class="btn">Send Message</button>
     </form>
     <div id="formStatus"></div>
@@ -77,6 +79,7 @@
   <!-- Footer -->
   <footer>
     <p>© 2025 AMD Professional Services. All rights reserved.</p>
+    <p>📞 +94 77 123 4567 | ✉️ info@amdproservice.com</p>
   </footer>
 
   <script src="script.js"></script>
