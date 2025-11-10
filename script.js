@@ -1,19 +1,47 @@
-// Smooth scroll and simple form feedback
+// Smooth scroll for navigation links
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(e.target.getAttribute('href'));
-    window.scrollTo({
-      top: target.offsetTop - 60,
-      behavior: 'smooth'
-    });
+    if(link.hash) {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      window.scrollTo({
+        top: target.offsetTop - 60,
+        behavior: 'smooth'
+      });
+    }
   });
 });
 
-// Fake contact form message (no backend)
-document.getElementById('contactForm').addEventListener('submit', function (e) {
+// Formspree submission feedback
+const form = document.getElementById('contactForm');
+const statusDiv = document.getElementById('formStatus');
+
+form.addEventListener('submit', function(e) {
   e.preventDefault();
-  document.getElementById('formStatus').textContent =
-    'Thank you for your message! We will contact you soon.';
-  this.reset();
+
+  const data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      statusDiv.textContent = 'Thank you! Your message has been sent.';
+      form.reset();
+    } else {
+      response.json().then(data => {
+        if (Object.hasOwn(data, 'errors')) {
+          statusDiv.textContent = data["errors"].map(error => error["message"]).join(", ");
+        } else {
+          statusDiv.textContent = 'Oops! There was a problem submitting your form';
+        }
+      });
+    }
+  })
+  .catch(error => {
+    statusDiv.textContent = 'Oops! There was a problem submitting your form';
+  });
 });
